@@ -63,8 +63,8 @@ export function RevealExperience({
       openedRef.current = true;
       setOpened(true);
       animate(x, TRACK, { duration: 0.2, ease: "easeOut" });
-      // let the lid pop + confetti celebrate, then load the results
-      setTimeout(() => router.push(`/result/${slug}`), 1150);
+      // lid pops + confetti + the full-colour figure reveals, then load results
+      setTimeout(() => router.push(`/result/${slug}`), 2300);
     } else {
       animate(x, 0, { type: "spring", stiffness: 300, damping: 30 });
     }
@@ -109,22 +109,47 @@ export function RevealExperience({
               className="absolute inset-0 overflow-hidden rounded-3xl shadow-box"
               style={{ backgroundColor: color }}
             >
-            {/* Figure silhouette (teaser only — not revealed here) */}
+            {/* Figure — silhouette teaser that turns full-colour once torn open */}
             <div className="absolute inset-0 flex items-center justify-center">
               <motion.div
-                animate={opened ? { scale: 1.08, y: -6 } : { scale: 1, y: 0 }}
+                className="relative h-[162px] w-[162px]"
+                animate={opened ? { scale: 1.12, y: -6 } : { scale: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
               >
-                <Image
-                  src={withBase(image)}
-                  alt=""
-                  aria-hidden
-                  width={172}
-                  height={172}
-                  priority
-                  className="h-[162px] w-[162px] object-contain"
-                  style={{ filter: "brightness(0) invert(1)", opacity: 0.5 }}
-                />
+                {/* white silhouette — fades away as the box opens */}
+                <motion.div
+                  className="absolute inset-0"
+                  animate={{ opacity: opened ? 0 : 0.5 }}
+                  transition={{ duration: 0.35, delay: opened ? 0.3 : 0 }}
+                >
+                  <Image
+                    src={withBase(image)}
+                    alt=""
+                    aria-hidden
+                    width={172}
+                    height={172}
+                    priority
+                    className="h-[162px] w-[162px] object-contain"
+                    style={{ filter: "brightness(0) invert(1)" }}
+                  />
+                </motion.div>
+
+                {/* full-colour figure — fades in right as the lid pops */}
+                <motion.div
+                  className="absolute inset-0"
+                  initial={false}
+                  animate={{ opacity: opened ? 1 : 0 }}
+                  transition={{ duration: 0.45, delay: opened ? 0.35 : 0 }}
+                >
+                  <Image
+                    src={withBase(image)}
+                    alt={data?.figureName ?? ""}
+                    width={172}
+                    height={172}
+                    priority
+                    className="h-[162px] w-[162px] object-contain drop-shadow-md"
+                  />
+                </motion.div>
               </motion.div>
             </div>
 
@@ -145,10 +170,14 @@ export function RevealExperience({
               <div className="absolute inset-x-0" style={{ top: LID_H }}>
                 <div className="relative">
                   <div className="border-t-2 border-dashed border-white/60" />
-                  {/* solid fill grows left→right as you swipe */}
+                  {/* torn gap grows left→right — exposes the page behind the card */}
                   <motion.div
-                    className="absolute -top-[2px] left-0 border-t-2 border-white"
-                    style={{ width: tearWidth }}
+                    className="absolute -top-[3px] left-0 h-[6px] rounded-[1px] bg-background"
+                    style={{
+                      width: tearWidth,
+                      boxShadow:
+                        "inset 0 2px 2px rgba(45,45,45,0.22), inset 0 -2px 2px rgba(45,45,45,0.22)",
+                    }}
                   />
                 </div>
               </div>
