@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { withBase } from "@/lib/asset";
+import { displayCharacter } from "@/lib/constants";
 
 const CHARACTERS = [
   {
@@ -94,7 +95,7 @@ export default function StorePage() {
 
               <div>
                 <h2 className="font-heading text-xl font-bold lowercase text-text">
-                  {char.name}
+                  {displayCharacter(char.name)}
                 </h2>
                 <p className="font-body text-xs text-muted">
                   {char.vibe} &nbsp;·&nbsp; {char.description}

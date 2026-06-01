@@ -80,10 +80,10 @@ export function RevealExperience({
   // The dashed "tear here" guide fades the moment ripping starts.
   const guideOpacity = useTransform(x, [0, TRACK * 0.18], [0.6, 0]);
 
-  // Prefetch the figure page so the transition is instant
+  // Prefetch the result page so the transition is instant
   useEffect(() => {
-    router.prefetch(`/result/${slug}`);
-  }, [router, slug]);
+    router.prefetch("/result");
+  }, [router]);
 
   // Only act once the pointer is released
   function handleDragEnd() {
@@ -95,7 +95,7 @@ export function RevealExperience({
       // confetti bursts, then we fade to the page background and slip straight
       // over to the results page.
       setTimeout(() => setLeaving(true), 850);
-      setTimeout(() => router.push(`/result/${slug}`), 1400);
+      setTimeout(() => router.push("/result"), 1400);
     } else {
       animate(x, 0, { type: "spring", stiffness: 300, damping: 30 });
       setTearing(false); // released without opening → let the box rattle again

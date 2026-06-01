@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { displayCharacter } from "@/lib/constants";
 
 const CHARACTERS = [
   {
@@ -114,7 +115,7 @@ export function BlindBoxPreview() {
                       className="font-heading text-[9px] font-bold uppercase tracking-[0.25em]"
                       style={{ color: "rgba(255,255,255,0.5)" }}
                     >
-                      {char.name}
+                      {displayCharacter(char.name)}
                     </p>
                   </div>
                 </div>
@@ -150,7 +151,7 @@ export function BlindBoxPreview() {
                 style={{ backgroundColor: char.color }}
               />
               <span className="font-body text-xs lowercase text-muted">
-                {char.name} — {char.vibe}
+                {displayCharacter(char.name)} — {char.vibe}
               </span>
             </motion.div>
           ))}

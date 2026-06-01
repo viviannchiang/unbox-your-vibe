@@ -4,6 +4,16 @@ export const CHARACTER_COLORS = {
   Lulu: "#F5B5C0",
 } as const;
 
+// Full display names for the characters. Internally we key everything by the
+// short name (e.g. "Lulu"); this maps to what the user actually sees.
+const CHARACTER_DISPLAY_NAMES: Record<string, string> = {
+  Lulu: "Lulu The Piggy",
+};
+
+export function displayCharacter(name: string): string {
+  return CHARACTER_DISPLAY_NAMES[name] ?? name;
+}
+
 // sessionStorage flag set when the quiz is finished. Result pages require it;
 // deep-linking to a result without it bounces the visitor back to the home page.
 // (sessionStorage clears when the tab closes, so each visit must earn it again.)
