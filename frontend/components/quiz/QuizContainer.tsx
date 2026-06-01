@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { api } from "@/lib/api";
 import { QuestionView } from "@/components/quiz/QuestionView";
 import { RevealExperience } from "@/components/reveal/RevealExperience";
+import { QUIZ_COMPLETED_KEY } from "@/lib/constants";
 import type { Question, QuizAnswer } from "@/lib/types";
 
 // Maps each MBTI axis to a character's brand color
@@ -50,6 +51,10 @@ export function QuizContainer() {
   const advancingRef = useRef(false);
 
   useEffect(() => {
+    // Entering the quiz always starts fresh — clear any prior completion flag so
+    // a result page can't be reached until this run is actually finished.
+    sessionStorage.removeItem(QUIZ_COMPLETED_KEY);
+
     api
       .getQuestions()
       .then(setQuestions)
@@ -86,6 +91,8 @@ export function QuizContainer() {
           .toLowerCase()
           .replace(/'/g, "")
           .replace(/\s+/g, "-");
+        // Mark the quiz complete so the result page will allow itself to render.
+        sessionStorage.setItem(QUIZ_COMPLETED_KEY, slug);
         // Show the box-opening in place — keeps the URL on /quiz
         setReveal({ slug, figureName, character });
       } catch {

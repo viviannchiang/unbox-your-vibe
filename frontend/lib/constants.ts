@@ -4,6 +4,11 @@ export const CHARACTER_COLORS = {
   Lulu: "#F5B5C0",
 } as const;
 
+// sessionStorage flag set when the quiz is finished. Result pages require it;
+// deep-linking to a result without it bounces the visitor back to the home page.
+// (sessionStorage clears when the tab closes, so each visit must earn it again.)
+export const QUIZ_COMPLETED_KEY = "uyv:completed";
+
 export const CHARACTER_BOX_PATTERNS = {
   Nyota: "star",
   Hirono: "line",

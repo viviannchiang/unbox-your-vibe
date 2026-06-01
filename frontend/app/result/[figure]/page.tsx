@@ -6,6 +6,7 @@ import { api } from "@/lib/api";
 import { PERSONALITIES } from "@/lib/data/personalities";
 import { slugifyFigure } from "@/lib/scoring";
 import { withBase } from "@/lib/asset";
+import { ResultGate } from "@/components/result/ResultGate";
 
 interface ResultPageProps {
   params: Promise<{ figure: string }>;
@@ -30,6 +31,7 @@ export default async function ResultPage({ params }: ResultPageProps) {
   const image = data?.image ?? `/images/figures/${figure}.png`;
 
   return (
+    <ResultGate>
     <main className="pattern-dots flex min-h-screen flex-col items-center justify-center gap-8 px-4 pt-14 text-center">
       <p className="font-heading text-[11px] font-bold uppercase tracking-[0.35em] text-muted">
         ✦ &nbsp; your figure &nbsp; ✦
@@ -74,5 +76,6 @@ export default async function ResultPage({ params }: ResultPageProps) {
         retake quiz
       </Link>
     </main>
+    </ResultGate>
   );
 }
