@@ -30,6 +30,28 @@ const TRACK = BOX_W - TAB_W; // handle travel distance (full width)
 const THRESHOLD = TRACK * 0.7; // swipe far enough to open
 const LID_H = Math.round(BOX_H * 0.34); // lid height / tear line baseline
 
+// Ragged tear seam: a zigzag boundary across the card at y = LID_H. The same
+// boundary is used to (a) clip the two halves so they split along a jagged edge
+// and (b) draw the rip line that advances as the handle is dragged across.
+const TEETH = 47;
+const TOOTH_AMP = 1.6; // px above/below the baseline
+const SEG = BOX_W / TEETH;
+const SEAM_PTS = Array.from({ length: TEETH + 1 }, (_, i) => ({
+  x: Math.round(i * SEG),
+  y: LID_H + (i % 2 === 0 ? -TOOTH_AMP : TOOTH_AMP),
+}));
+// clip-path for the top half: everything ABOVE the zigzag boundary
+const TOP_CLIP = `polygon(0px 0px, ${BOX_W}px 0px, ${[...SEAM_PTS]
+  .reverse()
+  .map((p) => `${p.x}px ${p.y}px`)
+  .join(", ")})`;
+// clip-path for the bottom half: everything BELOW the zigzag boundary
+const BOTTOM_CLIP = `polygon(${SEAM_PTS.map((p) => `${p.x}px ${p.y}px`).join(
+  ", ",
+)}, ${BOX_W}px ${BOX_H}px, 0px ${BOX_H}px)`;
+// SVG path string for the visible rip line
+const SEAM_PATH = "M " + SEAM_PTS.map((p) => `${p.x} ${p.y}`).join(" L ");
+
 export function RevealExperience({
   slug,
   data,
@@ -45,25 +67,18 @@ export function RevealExperience({
   const [ready, setReady] = useState(false); // grow finished → enable shake + swipe
   const [opened, setOpened] = useState(false); // tear triggered
   const [leaving, setLeaving] = useState(false); // fade-out → results page
+  const [tearing, setTearing] = useState(false); // dragging the rip → pause shake
 
   const shakeControls = useAnimationControls();
   const x = useMotionValue(0);
   const hintOpacity = useTransform(x, [0, THRESHOLD], [1, 0]);
   const openedRef = useRef(false);
 
-  // The two halves part live as the handle glides across, then (on release
-  // past the threshold) x is animated well past TRACK to fling them off-screen.
-  const FLING = TRACK * 2.6;
-  const topY = useTransform(x, [0, TRACK, FLING], [0, -34, -BOX_H * 0.95]);
-  const topX = useTransform(x, [0, TRACK, FLING], [0, -6, -34]);
-  const topRot = useTransform(x, [0, TRACK, FLING], [0, -3, -12]);
-  const topOp = useTransform(x, [0, TRACK, FLING], [1, 1, 0]);
-  const botY = useTransform(x, [0, TRACK, FLING], [0, 34, BOX_H * 0.95]);
-  const botX = useTransform(x, [0, TRACK, FLING], [0, 6, 34]);
-  const botRot = useTransform(x, [0, TRACK, FLING], [0, 3, 12]);
-  const botOp = useTransform(x, [0, TRACK, FLING], [1, 1, 0]);
-  // Resting card body (with its single shadow) fades as the tear opens.
-  const baseOp = useTransform(x, [0, TRACK * 0.5], [1, 0]);
+  // The ragged rip line draws itself across (left→right) as the handle glides;
+  // the card itself stays put until the tear completes on release.
+  const pathLength = useTransform(x, [0, TRACK], [0, 1]);
+  // The dashed "tear here" guide fades the moment ripping starts.
+  const guideOpacity = useTransform(x, [0, TRACK * 0.18], [0.6, 0]);
 
   // Prefetch the figure page so the transition is instant
   useEffect(() => {
@@ -75,20 +90,21 @@ export function RevealExperience({
     if (openedRef.current) return;
     if (x.get() >= THRESHOLD) {
       openedRef.current = true;
-      setOpened(true);
-      // fling the two halves off-screen; confetti bursts, then we fade to the
-      // page background and slip straight over to the results page.
-      animate(x, FLING, { duration: 0.55, ease: [0.4, 0, 0.6, 1] });
-      setTimeout(() => setLeaving(true), 800);
-      setTimeout(() => router.push(`/result/${slug}`), 1350);
+      animate(x, TRACK, { duration: 0.15, ease: "easeOut" }); // finish the rip line
+      setOpened(true); // halves split apart along the ragged seam
+      // confetti bursts, then we fade to the page background and slip straight
+      // over to the results page.
+      setTimeout(() => setLeaving(true), 850);
+      setTimeout(() => router.push(`/result/${slug}`), 1400);
     } else {
       animate(x, 0, { type: "spring", stiffness: 300, damping: 30 });
+      setTearing(false); // released without opening → let the box rattle again
     }
   }
 
-  // Rattle loop once the box has grown in (until opened)
+  // Rattle loop once the box has grown in (paused while tearing, until opened)
   useEffect(() => {
-    if (!ready || opened) return;
+    if (!ready || opened || tearing) return;
     let cancelled = false;
     async function rattle() {
       if (cancelled) return;
@@ -103,7 +119,7 @@ export function RevealExperience({
       cancelled = true;
       clearTimeout(first);
     };
-  }, [ready, opened, shakeControls]);
+  }, [ready, opened, tearing, shakeControls]);
 
   return (
     <main className="pattern-dots relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pt-14 text-center">
@@ -128,103 +144,94 @@ export function RevealExperience({
             {opened && <Confetti originY={36} />}
 
             {/* Resting card body — carries the single shadow so the seam has
-                no doubled-shadow line. Fades out as the tear opens, exposing a
-                soft dark crease (the "inside" of the torn card). */}
+                no doubled-shadow line. Fades out the instant the tear opens. */}
             <motion.div
               className="absolute inset-0 rounded-3xl shadow-box"
-              style={{ backgroundColor: color, opacity: baseOp }}
-            >
-              <div
-                className="absolute inset-x-0"
-                style={{
-                  top: LID_H - 44,
-                  height: 88,
-                  background:
-                    "linear-gradient(to bottom, transparent, rgba(45,45,45,0.30) 50%, transparent)",
-                }}
-              />
-            </motion.div>
+              style={{ backgroundColor: color }}
+              animate={{ opacity: opened ? 0 : 1 }}
+              transition={{ duration: 0.2 }}
+            />
 
-            {/* TOP half — parts upward as the handle glides, then flings off */}
-            <motion.div
-              className="absolute inset-x-0 top-0 overflow-hidden rounded-t-3xl"
-              style={{
-                height: LID_H,
-                transformOrigin: "left center",
-                y: topY,
-                x: topX,
-                rotate: topRot,
-                opacity: topOp,
-              }}
-            >
-              {/* full card face, clipped to this half */}
-              <div
-                className="absolute left-0 top-0"
-                style={{ width: BOX_W, height: BOX_H, backgroundColor: color }}
+            {/* The full card face, drawn twice and clipped along the ragged seam
+                so it can split into two jagged halves. Both copies are full-box
+                and identical, so the silhouette lines up perfectly while closed. */}
+            {[TOP_CLIP, BOTTOM_CLIP].map((clip, idx) => {
+              const isTop = idx === 0;
+              return (
+                <motion.div
+                  key={isTop ? "top" : "bottom"}
+                  className="absolute inset-0 overflow-hidden rounded-3xl"
+                  style={{ transformOrigin: isTop ? "left center" : "right center" }}
+                  animate={
+                    opened
+                      ? isTop
+                        ? { y: -BOX_H * 0.95, x: -30, rotate: -11, opacity: 0 }
+                        : { y: BOX_H * 0.95, x: 30, rotate: 11, opacity: 0 }
+                      : { y: 0, x: 0, rotate: 0, opacity: 1 }
+                  }
+                  transition={{ duration: 0.6, ease: [0.4, 0, 0.6, 1] }}
+                >
+                  <div
+                    className="absolute inset-0"
+                    style={{ clipPath: clip, backgroundColor: color }}
+                  >
+                    {/* lid sheen (top portion only) */}
+                    <div
+                      className="absolute inset-x-0 top-0 bg-white/15"
+                      style={{ height: LID_H }}
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Image
+                        src={withBase(image)}
+                        alt=""
+                        aria-hidden
+                        width={172}
+                        height={172}
+                        priority
+                        className="h-[162px] w-[162px] object-contain"
+                        style={{ filter: "brightness(0) invert(1)", opacity: 0.5 }}
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+
+            {/* Ragged rip line — drawn across (left→right) as the handle glides */}
+            {!opened && (
+              <svg
+                className="pointer-events-none absolute inset-0"
+                width={BOX_W}
+                height={BOX_H}
+                viewBox={`0 0 ${BOX_W} ${BOX_H}`}
+                fill="none"
               >
-                {/* lid sheen */}
-                <div
-                  className="absolute inset-x-0 top-0 bg-white/15"
-                  style={{ height: LID_H }}
+                {/* torn-paper highlight */}
+                <motion.path
+                  d={SEAM_PATH}
+                  stroke="rgba(255,255,255,0.85)"
+                  strokeWidth={3}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{ pathLength }}
                 />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Image
-                    src={withBase(image)}
-                    alt=""
-                    aria-hidden
-                    width={172}
-                    height={172}
-                    priority
-                    className="h-[162px] w-[162px] object-contain"
-                    style={{ filter: "brightness(0) invert(1)", opacity: 0.5 }}
-                  />
-                </div>
-              </div>
-            </motion.div>
+                {/* dark crease on top */}
+                <motion.path
+                  d={SEAM_PATH}
+                  stroke="rgba(45,45,45,0.55)"
+                  strokeWidth={1.5}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{ pathLength }}
+                />
+              </svg>
+            )}
 
-            {/* BOTTOM half — parts downward as the handle glides, then flings off */}
-            <motion.div
-              className="absolute inset-x-0 overflow-hidden rounded-b-3xl"
-              style={{
-                top: LID_H,
-                height: BOX_H - LID_H,
-                transformOrigin: "right center",
-                y: botY,
-                x: botX,
-                rotate: botRot,
-                opacity: botOp,
-              }}
-            >
-              {/* same card face, shifted up so the silhouette lines up across the seam */}
-              <div
-                className="absolute left-0"
-                style={{
-                  top: -LID_H,
-                  width: BOX_W,
-                  height: BOX_H,
-                  backgroundColor: color,
-                }}
-              >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Image
-                    src={withBase(image)}
-                    alt=""
-                    aria-hidden
-                    width={172}
-                    height={172}
-                    priority
-                    className="h-[162px] w-[162px] object-contain"
-                    style={{ filter: "brightness(0) invert(1)", opacity: 0.5 }}
-                  />
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Dotted tear line at the seam (fades as the tear opens) */}
+            {/* Faint dashed guide showing where to tear (fades as you rip) */}
             {!opened && (
               <motion.div
-                className="absolute inset-x-0 border-t-2 border-dashed border-white/60"
-                style={{ top: LID_H, opacity: baseOp }}
+                className="absolute inset-x-0 border-t-2 border-dashed border-white/50"
+                style={{ top: LID_H, opacity: guideOpacity }}
               />
             )}
 
@@ -258,6 +265,13 @@ export function RevealExperience({
                 dragConstraints={{ left: 0, right: TRACK }}
                 dragElastic={0}
                 dragMomentum={false}
+                onDragStart={() => {
+                  setTearing(true); // stop the rattle while the user is tearing
+                  shakeControls.start({
+                    rotate: 0,
+                    transition: { duration: 0.18, ease: "easeOut" },
+                  });
+                }}
                 onDragEnd={handleDragEnd}
                 style={{ x, width: TAB_W, left: 0, top: LID_H - 20 }}
                 className="absolute z-10 h-10 cursor-grab touch-none active:cursor-grabbing"
