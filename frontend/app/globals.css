@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #F5F0F0;
+  --foreground: #2D2D2D;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+@layer utilities {
+  /* Subtle packaging-paper dot texture */
+  .pattern-dots {
+    background-image: radial-gradient(circle, #ddd8d8 1.5px, transparent 1.5px);
+    background-size: 26px 26px;
+  }
+}
