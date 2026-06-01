@@ -51,6 +51,20 @@ export function RevealExperience({
   const hintOpacity = useTransform(x, [0, THRESHOLD], [1, 0]);
   const openedRef = useRef(false);
 
+  // The two halves part live as the handle glides across, then (on release
+  // past the threshold) x is animated well past TRACK to fling them off-screen.
+  const FLING = TRACK * 2.6;
+  const topY = useTransform(x, [0, TRACK, FLING], [0, -34, -BOX_H * 0.95]);
+  const topX = useTransform(x, [0, TRACK, FLING], [0, -6, -34]);
+  const topRot = useTransform(x, [0, TRACK, FLING], [0, -3, -12]);
+  const topOp = useTransform(x, [0, TRACK, FLING], [1, 1, 0]);
+  const botY = useTransform(x, [0, TRACK, FLING], [0, 34, BOX_H * 0.95]);
+  const botX = useTransform(x, [0, TRACK, FLING], [0, 6, 34]);
+  const botRot = useTransform(x, [0, TRACK, FLING], [0, 3, 12]);
+  const botOp = useTransform(x, [0, TRACK, FLING], [1, 1, 0]);
+  // Resting card body (with its single shadow) fades as the tear opens.
+  const baseOp = useTransform(x, [0, TRACK * 0.5], [1, 0]);
+
   // Prefetch the figure page so the transition is instant
   useEffect(() => {
     router.prefetch(`/result/${slug}`);
@@ -62,11 +76,11 @@ export function RevealExperience({
     if (x.get() >= THRESHOLD) {
       openedRef.current = true;
       setOpened(true);
-      animate(x, TRACK, { duration: 0.2, ease: "easeOut" });
-      // card splits + confetti + the full-colour figure reveals, then we
-      // fade to the page background and slip over to the results page.
-      setTimeout(() => setLeaving(true), 1850);
-      setTimeout(() => router.push(`/result/${slug}`), 2450);
+      // fling the two halves off-screen; confetti bursts, then we fade to the
+      // page background and slip straight over to the results page.
+      animate(x, FLING, { duration: 0.55, ease: [0.4, 0, 0.6, 1] });
+      setTimeout(() => setLeaving(true), 800);
+      setTimeout(() => router.push(`/result/${slug}`), 1350);
     } else {
       animate(x, 0, { type: "spring", stiffness: 300, damping: 30 });
     }
@@ -113,38 +127,35 @@ export function RevealExperience({
           <div className="relative" style={{ width: BOX_W, height: BOX_H }}>
             {opened && <Confetti originY={36} />}
 
-            {/* Revealed full-colour figure — sits behind the card, exposed as
-                the two torn halves fly apart */}
+            {/* Resting card body — carries the single shadow so the seam has
+                no doubled-shadow line. Fades out as the tear opens, exposing a
+                soft dark crease (the "inside" of the torn card). */}
             <motion.div
-              className="absolute inset-0 flex items-center justify-center"
-              initial={false}
-              animate={
-                opened
-                  ? { opacity: 1, scale: 1.12, y: -6 }
-                  : { opacity: 0, scale: 0.9, y: 0 }
-              }
-              transition={{ duration: 0.5, delay: opened ? 0.18 : 0, ease: "easeOut" }}
+              className="absolute inset-0 rounded-3xl shadow-box"
+              style={{ backgroundColor: color, opacity: baseOp }}
             >
-              <Image
-                src={withBase(image)}
-                alt={data?.figureName ?? ""}
-                width={172}
-                height={172}
-                priority
-                className="h-[162px] w-[162px] object-contain drop-shadow-md"
+              <div
+                className="absolute inset-x-0"
+                style={{
+                  top: LID_H - 44,
+                  height: 88,
+                  background:
+                    "linear-gradient(to bottom, transparent, rgba(45,45,45,0.30) 50%, transparent)",
+                }}
               />
             </motion.div>
 
-            {/* TOP half — tears up & to the left */}
+            {/* TOP half — parts upward as the handle glides, then flings off */}
             <motion.div
-              className="absolute inset-x-0 top-0 overflow-hidden rounded-t-3xl shadow-box"
-              style={{ height: LID_H, transformOrigin: "left center" }}
-              animate={
-                opened
-                  ? { y: -BOX_H * 0.85, x: -26, rotate: -10, opacity: 0 }
-                  : { y: 0, x: 0, rotate: 0, opacity: 1 }
-              }
-              transition={{ duration: 0.6, ease: [0.4, 0, 0.6, 1] }}
+              className="absolute inset-x-0 top-0 overflow-hidden rounded-t-3xl"
+              style={{
+                height: LID_H,
+                transformOrigin: "left center",
+                y: topY,
+                x: topX,
+                rotate: topRot,
+                opacity: topOp,
+              }}
             >
               {/* full card face, clipped to this half */}
               <div
@@ -169,22 +180,22 @@ export function RevealExperience({
                   />
                 </div>
               </div>
-              {/* torn edge highlight */}
-              <div className="absolute inset-x-0 bottom-0 h-[3px] bg-black/10" />
             </motion.div>
 
-            {/* BOTTOM half — tears down & to the right */}
+            {/* BOTTOM half — parts downward as the handle glides, then flings off */}
             <motion.div
-              className="absolute inset-x-0 overflow-hidden rounded-b-3xl shadow-box"
-              style={{ top: LID_H, height: BOX_H - LID_H, transformOrigin: "right center" }}
-              animate={
-                opened
-                  ? { y: BOX_H * 0.85, x: 26, rotate: 10, opacity: 0 }
-                  : { y: 0, x: 0, rotate: 0, opacity: 1 }
-              }
-              transition={{ duration: 0.6, ease: [0.4, 0, 0.6, 1] }}
+              className="absolute inset-x-0 overflow-hidden rounded-b-3xl"
+              style={{
+                top: LID_H,
+                height: BOX_H - LID_H,
+                transformOrigin: "right center",
+                y: botY,
+                x: botX,
+                rotate: botRot,
+                opacity: botOp,
+              }}
             >
-              {/* same card face, shifted up so the figure lines up across the seam */}
+              {/* same card face, shifted up so the silhouette lines up across the seam */}
               <div
                 className="absolute left-0"
                 style={{
@@ -207,15 +218,13 @@ export function RevealExperience({
                   />
                 </div>
               </div>
-              {/* torn edge highlight */}
-              <div className="absolute inset-x-0 top-0 h-[3px] bg-white/25" />
             </motion.div>
 
-            {/* Dotted tear line at the seam (hidden once torn) */}
+            {/* Dotted tear line at the seam (fades as the tear opens) */}
             {!opened && (
-              <div
+              <motion.div
                 className="absolute inset-x-0 border-t-2 border-dashed border-white/60"
-                style={{ top: LID_H }}
+                style={{ top: LID_H, opacity: baseOp }}
               />
             )}
 
