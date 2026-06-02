@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Quicksand, DM_Sans } from "next/font/google";
 import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
 import "./globals.css";
 
 const quicksand = Quicksand({
@@ -32,6 +33,7 @@ export default function RootLayout({
       >
         <Nav />
         {children}
+        <Footer />
       </body>
     </html>
   );
