@@ -14,7 +14,7 @@ const ROLES = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen pt-14">
+    <main className="min-h-[calc(100dvh_-_3.5rem)] pt-14">
 
       {/* Hero */}
       <div className="pattern-dots px-6 py-20 text-center">

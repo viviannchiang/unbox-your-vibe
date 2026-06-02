@@ -56,7 +56,7 @@ export function Hero() {
   const figure = FIGURES[figIdx];
 
   return (
-    <section className="pattern-dots relative flex min-h-screen flex-col items-center justify-center gap-8 overflow-hidden px-4 pt-14 text-center">
+    <section className="pattern-dots relative flex min-h-[calc(100dvh_-_3.5rem)] flex-col items-center justify-center gap-8 overflow-hidden px-4 pt-14 text-center">
 
       {/* ── Ambient sparkles ── */}
       {SPARKLES.map((s) => (

@@ -33,7 +33,7 @@ export function ResultView() {
 
   if (!checked || !data) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center pt-14">
+      <div className="flex min-h-[calc(100dvh_-_3.5rem)] flex-col items-center justify-center pt-14">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
@@ -70,7 +70,7 @@ export function ResultView() {
   });
 
   return (
-    <main className="pattern-dots flex min-h-screen flex-col items-center px-4 pb-20 pt-20 text-center">
+    <main className="pattern-dots flex min-h-[calc(100dvh_-_3.5rem)] flex-col items-center px-4 pb-20 pt-20 text-center">
       {/* ── Hero ─────────────────────────────────────────── */}
       <motion.p
         {...sec(0)}

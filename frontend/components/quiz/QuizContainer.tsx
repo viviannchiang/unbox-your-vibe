@@ -107,7 +107,7 @@ export function QuizContainer() {
   // ── Loading ────────────────────────────────────────────────
   if (loading) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center gap-4 pt-14">
+      <div className="flex min-h-[calc(100dvh_-_3.5rem)] flex-col items-center justify-center gap-4 pt-14">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
@@ -121,7 +121,7 @@ export function QuizContainer() {
   // ── Error ──────────────────────────────────────────────────
   if (error) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center gap-6 px-4 pt-14 text-center">
+      <div className="flex min-h-[calc(100dvh_-_3.5rem)] flex-col items-center justify-center gap-6 px-4 pt-14 text-center">
         <p className="font-heading text-lg lowercase text-text">{error}</p>
         <button
           onClick={() => window.location.reload()}
@@ -146,7 +146,7 @@ export function QuizContainer() {
   // ── Submitting / "calculating" ─────────────────────────────
   if (submitting) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center gap-5 px-4 pt-14">
+      <div className="flex min-h-[calc(100dvh_-_3.5rem)] flex-col items-center justify-center gap-5 px-4 pt-14">
         <motion.div
           animate={{
             scale: [1, 1.08, 1],
@@ -174,7 +174,7 @@ export function QuizContainer() {
     ((currentIdx + (selectedCardId ? 1 : 0)) / questions.length) * 100;
 
   return (
-    <div className="pattern-dots relative flex min-h-screen flex-col items-center justify-center px-4 pt-14">
+    <div className="pattern-dots relative flex min-h-[calc(100dvh_-_3.5rem)] flex-col items-center justify-center px-4 pt-14">
 
       {/* ── Progress bar (fixed just below nav) ── */}
       <div className="fixed inset-x-0 top-14 z-10 bg-background/80 px-6 py-4 backdrop-blur-sm">

@@ -122,7 +122,7 @@ export function RevealExperience({
   }, [ready, opened, tearing, shakeControls]);
 
   return (
-    <main className="pattern-dots relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pt-14 text-center">
+    <main className="pattern-dots relative flex min-h-[calc(100dvh_-_3.5rem)] flex-col items-center justify-center overflow-hidden px-4 pt-14 text-center">
       {/* Fade-to-background veil — covers the hand-off to the results page */}
       <motion.div
         className="pointer-events-none fixed inset-0 z-50 bg-background"
