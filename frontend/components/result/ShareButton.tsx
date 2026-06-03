@@ -244,12 +244,80 @@ function drawStamp(
   ctx.textBaseline = "alphabetic";
 }
 
+// Lay the vibe words out as centered pill/chips (mirrors the on-site "the vibe"
+// section). Returns the y just below the last row.
+function drawChips(
+  ctx: CanvasRenderingContext2D,
+  words: string[],
+  cx: number,
+  top: number,
+  maxWidth: number,
+  accent: string,
+  ink: string,
+  heading: string,
+): number {
+  const padX = 22;
+  const chipH = 46;
+  const gapX = 12;
+  const gapY = 12;
+  ctx.font = `700 22px ${heading}`;
+
+  type Chip = { w: string; width: number };
+  const items: Chip[] = words.map((w) => ({
+    w,
+    width: ctx.measureText(w).width + padX * 2,
+  }));
+
+  // Flow chips into rows that fit within maxWidth.
+  const rows: { items: Chip[]; width: number }[] = [];
+  let row: Chip[] = [];
+  let rowW = 0;
+  for (const it of items) {
+    const add = (row.length ? gapX : 0) + it.width;
+    if (rowW + add > maxWidth && row.length) {
+      rows.push({ items: row, width: rowW });
+      row = [it];
+      rowW = it.width;
+    } else {
+      row.push(it);
+      rowW += add;
+    }
+  }
+  if (row.length) rows.push({ items: row, width: rowW });
+
+  let y = top;
+  for (const r of rows) {
+    let x = cx - r.width / 2; // center each row
+    for (const it of r.items) {
+      const rad = chipH / 2;
+      ctx.beginPath();
+      ctx.moveTo(x + rad, y);
+      ctx.arcTo(x + it.width, y, x + it.width, y + chipH, rad);
+      ctx.arcTo(x + it.width, y + chipH, x, y + chipH, rad);
+      ctx.arcTo(x, y + chipH, x, y, rad);
+      ctx.arcTo(x, y, x + it.width, y, rad);
+      ctx.closePath();
+      ctx.fillStyle = accent + "33";
+      ctx.fill();
+
+      ctx.fillStyle = ink;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(it.w, x + it.width / 2, y + chipH / 2 + 1);
+      x += it.width + gapX;
+    }
+    y += chipH + gapY;
+  }
+  ctx.textBaseline = "alphabetic";
+  return y;
+}
+
 async function buildShareImage(
   data: PersonalityResult,
   pairs: PersonalityResult[],
 ): Promise<Blob> {
   const W = 1080;
-  const H = 1500;
+  const H = 1800;
   const canvas = document.createElement("canvas");
   canvas.width = W;
   canvas.height = H;
@@ -384,9 +452,25 @@ async function buildShareImage(
   y += 42;
   ctx.fillStyle = "rgba(45,45,45,0.8)";
   ctx.font = `400 25px ${heading}`;
-  for (const line of wrapText(ctx, data.description, textW).slice(0, 4)) {
+  for (const line of wrapText(ctx, data.description, textW).slice(0, 3)) {
     ctx.fillText(line, cx, y);
     y += 37;
+  }
+
+  // ── "the vibe" word chips ─────────────────────────────────
+  if (data.vibeWords && data.vibeWords.length > 0) {
+    y += 28;
+    dashedDivider(ctx, dx1, dx2, y, dash);
+    y += 48;
+    ctx.fillStyle = accent;
+    ctx.font = `700 21px ${heading}`;
+    ctx.textAlign = "center";
+    setSpacing("4px");
+    ctx.fillText("✦   THE VIBE", cx, y);
+    setSpacing("0px");
+    y += 42;
+    y = drawChips(ctx, data.vibeWords, cx, y, textW, accent, ink, heading);
+    y += 6;
   }
 
   // ── "you pair well with" ──────────────────────────────────
