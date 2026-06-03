@@ -52,10 +52,13 @@ export default function StorePage() {
   return (
     <main className="min-h-[calc(100dvh_-_3.5rem)] pt-14">
 
-      {/* Header */}
-      <div className="pattern-dots px-6 py-20 text-center">
-        <p className="font-heading text-sm font-bold uppercase tracking-[0.35em] text-muted">
-          ✦ &nbsp; the collection &nbsp; ✦
+      {/* Header — ticket / collector's-edition vibe */}
+      <div className="pattern-dots relative overflow-hidden border-b-2 border-dashed border-text/15 px-6 py-20 text-center">
+        <p className="font-heading text-sm font-bold uppercase tracking-[0.3em] text-muted">
+          ✦ &nbsp; the collector&apos;s lineup &nbsp; ✦
+        </p>
+        <p className="mt-3 font-heading text-[11px] font-bold uppercase tracking-[0.28em] text-muted/80">
+          blind box, 16 figures
         </p>
       </div>
 
@@ -108,8 +111,8 @@ export default function StorePage() {
         </section>
       ))}
 
-      {/* Bottom CTA */}
-      <div className="bg-card px-6 py-20 text-center">
+      {/* Bottom CTA — closes the "ticket" with a matching tear-line */}
+      <div className="relative overflow-hidden border-t-2 border-dashed border-text/15 bg-card px-6 py-20 text-center">
         <p className="font-heading text-[11px] font-bold uppercase tracking-[0.35em] text-muted">
           ✦ &nbsp; don&apos;t know yours? &nbsp; ✦
         </p>

@@ -171,10 +171,10 @@ export function ProfileView({
                       className="h-16 w-16 object-contain drop-shadow-sm"
                     />
                   </div>
-                  <p className="font-heading text-[11px] font-bold lowercase leading-tight text-text">
+                  <p className="text-center font-heading text-[11px] font-bold lowercase leading-tight text-text">
                     {p.figureName}
                   </p>
-                  <p className="-mt-1 font-body text-[10px] text-muted">
+                  <p className="-mt-1 text-center font-body text-[10px] text-muted">
                     {displayCharacter(p.character)}
                   </p>
                 </div>
