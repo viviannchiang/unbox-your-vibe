@@ -25,7 +25,7 @@ export function BottomCTA() {
         </h2>
 
         <p className="max-w-sm font-body text-sm leading-relaxed text-muted">
-          12 questions. one blind box. zero spoilers until you swipe it open.
+          20 questions. one blind box. zero spoilers until you swipe it open.
         </p>
 
         <motion.div

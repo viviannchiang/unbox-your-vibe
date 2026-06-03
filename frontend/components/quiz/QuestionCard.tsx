@@ -27,10 +27,13 @@ export function QuestionCard({
       animate={{ opacity: dimmed ? 0.38 : 1 }}
       transition={{ type: "spring", stiffness: 360, damping: 22 }}
       onClick={() => !dimmed && onSelect(option.id)}
-      className={dimmed ? "pointer-events-none" : "cursor-pointer"}
+      className={`h-full ${dimmed ? "pointer-events-none" : "cursor-pointer"}`}
     >
+      {/* Fixed min-height + centered content: the label sits dead-center when
+          idle, slides up on select, and the "this is me" badge fades into the
+          space that opens at the bottom — no reflow, so the card never jumps. */}
       <div
-        className="relative overflow-hidden rounded-3xl bg-card px-5 py-6 transition-all duration-250"
+        className="relative flex h-full min-h-[8rem] items-center justify-center overflow-hidden rounded-3xl bg-card px-5 py-6 text-center transition-all duration-250"
         style={{
           border: `2px solid ${selected ? color : "transparent"}`,
           boxShadow: selected
@@ -48,17 +51,21 @@ export function QuestionCard({
           transition={{ duration: 0.3, ease: "easeOut" }}
         />
 
-        {/* Card label */}
-        <p className="font-body text-sm leading-relaxed text-text sm:text-base">
+        {/* Card label — centered; slides up on select to make room for the badge */}
+        <motion.p
+          className="font-body text-sm leading-relaxed text-text sm:text-base"
+          animate={{ y: selected ? -14 : 0 }}
+          transition={{ type: "spring", stiffness: 360, damping: 26 }}
+        >
           {option.label}
-        </p>
+        </motion.p>
 
-        {/* "this is me" badge — appears when selected */}
+        {/* "this is me" badge — fades in centered at the bottom when selected */}
         <motion.div
-          className="mt-4 flex items-center gap-1.5"
-          initial={{ opacity: 0, y: 4 }}
-          animate={{ opacity: selected ? 1 : 0, y: selected ? 0 : 4 }}
-          transition={{ duration: 0.22, delay: selected ? 0.1 : 0 }}
+          className="absolute inset-x-0 bottom-5 flex items-center justify-center gap-1.5"
+          initial={false}
+          animate={{ opacity: selected ? 1 : 0, y: selected ? 0 : 6 }}
+          transition={{ duration: 0.22, delay: selected ? 0.08 : 0 }}
         >
           {/* Checkmark circle */}
           <div

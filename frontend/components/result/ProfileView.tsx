@@ -28,6 +28,7 @@ export function ProfileView({
     series,
     tagline,
     description,
+    vibeWords,
     thisIsYou,
     groupChatVibe,
     color,
@@ -111,9 +112,30 @@ export function ProfileView({
           </p>
         </motion.section>
 
+        {/* the vibe — quick word association */}
+        {vibeWords.length > 0 && (
+          <motion.section
+            {...sec(6)}
+            className="rounded-3xl bg-card p-6 shadow-card"
+          >
+            <SectionLabel color={color}>the vibe</SectionLabel>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {vibeWords.map((word) => (
+                <span
+                  key={word}
+                  className="rounded-full px-3 py-1.5 font-heading text-xs font-bold lowercase tracking-wide text-text/80"
+                  style={{ backgroundColor: color + "26" }}
+                >
+                  {word}
+                </span>
+              ))}
+            </div>
+          </motion.section>
+        )}
+
         {/* this is you */}
         <motion.section
-          {...sec(6)}
+          {...sec(7)}
           className="rounded-3xl bg-card p-6 shadow-card"
         >
           <SectionLabel color={color}>this is you</SectionLabel>
@@ -137,7 +159,7 @@ export function ProfileView({
 
         {/* in the group chat */}
         <motion.section
-          {...sec(7)}
+          {...sec(8)}
           className="rounded-3xl p-6"
           style={{ backgroundColor: color + "26" }}
         >
@@ -149,7 +171,7 @@ export function ProfileView({
 
         {/* pairs well with */}
         {pairs.length > 0 && (
-          <motion.section {...sec(8)}>
+          <motion.section {...sec(9)}>
             <SectionLabel color={color} center>
               you pair well with
             </SectionLabel>
@@ -186,7 +208,7 @@ export function ProfileView({
 
       {/* ── Actions ─────────────────────────────────────── */}
       <motion.div
-        {...sec(9)}
+        {...sec(10)}
         className="mt-12 flex w-full max-w-xs flex-col items-stretch gap-3"
       >
         {actions}

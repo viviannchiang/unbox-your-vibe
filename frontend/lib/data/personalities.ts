@@ -9,7 +9,15 @@ export const PERSONALITIES: Record<string, PersonalityResult> = {
     "figureName": "Cloudwatcher",
     "series": "I Am the Seasons",
     "tagline": "you built an entire universe in your head and honestly it's better than this one",
-    "description": "you're the type to cry at a commercial and then pretend it didn't happen. your inner world is so rich that reality feels like a downgrade sometimes. you care deeply about things most people scroll past, and you express yourself best through things you'd never say out loud — playlists, journal entries, the way you arrange your space. you're not quiet because you have nothing to say. you're quiet because you have too much.",
+    "description": "you're the type to cry at a commercial and then pretend it didn't happen. your inner world is so rich that reality feels like a slight downgrade — and you're quiet not because you have nothing to say, but because you have too much.",
+    "vibeWords": [
+      "emotionally fluent",
+      "daydream addict",
+      "0 to sobbing real quick",
+      "lowkey poet",
+      "values-coded",
+      "soft but feral"
+    ],
     "thisIsYou": [
       "your playlists have lore",
       "you've rewritten a text four times and then didn't send it",
@@ -45,7 +53,15 @@ export const PERSONALITIES: Record<string, PersonalityResult> = {
     "figureName": "Sanctuary Star",
     "series": "We Are All Stars",
     "tagline": "you knew what everyone needed before they said it and honestly that's a little terrifying",
-    "description": "you're the friend people come to when they need to be understood, not fixed. you absorb emotions like a sponge and then wonder why you're exhausted. you see patterns in people that they don't see in themselves, which makes you an incredible friend and also an occasional overthinker. your ideal life is meaningful work, a small circle, and a lot of silence.",
+    "description": "you're the friend people come to when they need to be understood, not fixed. you read people like open books and absorb their emotions, then wonder why you're so tired. small circle, meaningful work, lots of silence — that's the dream.",
+    "vibeWords": [
+      "empath supreme",
+      "human lie detector",
+      "low social battery",
+      "deep convos only",
+      "old soul",
+      "quietly intense"
+    ],
     "thisIsYou": [
       "people tell you their secrets within twenty minutes. you didn't ask.",
       "you have a vision for the group project and will quietly redo it at 1am",
@@ -81,7 +97,15 @@ export const PERSONALITIES: Record<string, PersonalityResult> = {
     "figureName": "Hidden in Autumn",
     "series": "I Am the Seasons",
     "tagline": "still waters run deep and yours have a whole coral reef down there",
-    "description": "you experience the world through texture and mood. you're the person who notices the light hitting a building and has to stop walking for a second. your taste is specific, your feelings are intense, and your creative output — whatever form it takes — is more honest than most people's conversations. you don't follow trends. trends occasionally follow you.",
+    "description": "you experience the world through texture and mood — you'll stop walking just to watch the light hit a building. your taste is specific, your feelings are intense, and you're gentle with the people you let in. you don't follow trends; trends occasionally follow you.",
+    "vibeWords": [
+      "aesthetic-coded",
+      "soft-spoken menace",
+      "feels in color",
+      "pinterest brain",
+      "quietly iconic",
+      "vibe curator"
+    ],
     "thisIsYou": [
       "your spotify is a mood board and it shifts daily",
       "you notice details nobody else catches",
@@ -117,7 +141,15 @@ export const PERSONALITIES: Record<string, PersonalityResult> = {
     "figureName": "Snowfall Bliss",
     "series": "I Am the Seasons",
     "tagline": "you love quietly and that's what makes it hit so hard",
-    "description": "you're the person who remembers how someone takes their coffee three months after they mentioned it once. you show up. you follow through. you don't need credit for any of it. your love language is acts of service delivered so seamlessly that people forget someone had to do all that work. you hold things together for everyone and ask for very little in return.",
+    "description": "you remember how someone takes their coffee three months after they mentioned it once. you show up, you follow through, and you never ask for credit. you hold everything together for everyone and ask for almost nothing back.",
+    "vibeWords": [
+      "mom friend",
+      "remembers everything",
+      "acts of service",
+      "quietly reliable",
+      "'too nice', allegedly",
+      "comfort personified"
+    ],
     "thisIsYou": [
       "you remember the small things nobody else notices",
       "you've been told 'you're too nice' and you didn't know what to do with that",
@@ -153,7 +185,15 @@ export const PERSONALITIES: Record<string, PersonalityResult> = {
     "figureName": "Insight",
     "series": "City of Mercy",
     "tagline": "you saw the outcome three steps ago and you're just waiting for everyone to catch up",
-    "description": "you operate on a different processing speed than most people and you've made peace with it. you don't need external validation — you need competence, efficiency, and for people to stop scheduling meetings that could've been emails. your brain is always running a background simulation of how things will play out, and you're right often enough that it's annoying to everyone else.",
+    "description": "you operate on a different processing speed and you've made peace with it. you don't need validation — just competence, efficiency, and for people to stop scheduling meetings that could've been emails. your brain runs background simulations and you're right annoyingly often.",
+    "vibeWords": [
+      "3 steps ahead",
+      "competence connoisseur",
+      "small-talk allergy",
+      "master-plan energy",
+      "resting strategist face",
+      "emotionally... efficient"
+    ],
     "thisIsYou": [
       "you've already planned your exit before you walk into a party",
       "'I told you so' is your most-used internal monologue",
@@ -189,7 +229,15 @@ export const PERSONALITIES: Record<string, PersonalityResult> = {
     "figureName": "Echo",
     "series": "City of Mercy",
     "tagline": "your brain has 200 tabs open and none of them are social skills",
-    "description": "you live inside your own head and it's a genuinely fascinating place. you can connect ideas that have no business being in the same sentence and somehow make it make sense. the problem is that explaining your thought process to other people is like trying to export a file in a format that doesn't exist yet. you're not antisocial — you're just busy thinking about whether time is a flat circle.",
+    "description": "you live inside your own head and it's a genuinely fascinating place. you connect ideas that have no business being together and make it make sense — explaining it out loud is the hard part. you're not antisocial, just busy wondering if time is a flat circle.",
+    "vibeWords": [
+      "200 tabs open",
+      "theory generator",
+      "wikipedia rabbit holes",
+      "forgot to eat again",
+      "logic gremlin",
+      "unbothered overthinker"
+    ],
     "thisIsYou": [
       "you've gone down a wikipedia rabbit hole and emerged four hours later knowing everything about medieval siege weapons",
       "you answer simple questions with complicated answers",
@@ -225,7 +273,15 @@ export const PERSONALITIES: Record<string, PersonalityResult> = {
     "figureName": "Protector",
     "series": "Little Mischief",
     "tagline": "you didn't come here to participate, you came here to lead",
-    "description": "you see inefficiency the way some people see a crooked picture frame — it physically bothers you until you fix it. you're the person who walks into chaos and starts organizing it without being asked, and somehow everyone just lets you? because you're usually right. you don't micromanage — you set the vision and expect people to keep up.",
+    "description": "you see inefficiency the way others see a crooked picture frame — it bugs you until it's fixed. you walk into chaos and start organizing it unasked, and somehow everyone just lets you, because you're usually right. you set the vision and expect people to keep up.",
+    "vibeWords": [
+      "born to lead",
+      "five-year-plan haver",
+      "efficiency obsessed",
+      "delegates like a general",
+      "no chill, all results",
+      "crooked-frame energy"
+    ],
     "thisIsYou": [
       "you have a five-year plan and a backup five-year plan",
       "you've reorganized someone else's workflow without being asked",
@@ -261,7 +317,15 @@ export const PERSONALITIES: Record<string, PersonalityResult> = {
     "figureName": "Ragpicker",
     "series": "Little Mischief",
     "tagline": "you fixed it, you won't explain how, and you'd like to be alone now",
-    "description": "you're the most quietly capable person in any room and you have zero interest in proving it. you learn by doing, you solve problems by taking things apart, and you communicate through actions because words feel like an inefficient format. people underestimate you exactly once.",
+    "description": "you're the most quietly capable person in any room and you have zero interest in proving it. you learn by doing, solve problems by taking things apart, and let your actions do the talking. people underestimate you exactly once.",
+    "vibeWords": [
+      "fixes everything",
+      "low-key genius",
+      "actions > words",
+      "needs 12 hrs alone",
+      "unbothered",
+      "mysteriously competent"
+    ],
     "thisIsYou": [
       "you can build, fix, or disassemble basically anything",
       "you show love by solving problems, not talking about feelings",
@@ -297,7 +361,15 @@ export const PERSONALITIES: Record<string, PersonalityResult> = {
     "figureName": "Folk Singer",
     "series": "My Sweet Farm Garden",
     "tagline": "you love so hard it's basically a cardio workout",
-    "description": "your enthusiasm is genuinely a superpower. you make people feel like the most interesting person in the room, you generate ideas faster than you can execute them, and you've never met a stranger — just a friend you haven't vibed with yet. your biggest challenge is that everything is exciting and you only have one life.",
+    "description": "your enthusiasm is genuinely a superpower — you make people feel like the most interesting person in the room and generate ideas faster than you can execute them. you've never met a stranger, just a friend you haven't vibed with yet.",
+    "vibeWords": [
+      "chaotic good",
+      "new hobby weekly",
+      "never met a stranger",
+      "idea machine",
+      "2am genius ideas",
+      "contagiously hyped"
+    ],
     "thisIsYou": [
       "you have a new passion every week and each one is 'the one'",
       "strangers become your best friend in ten minutes flat",
@@ -333,7 +405,15 @@ export const PERSONALITIES: Record<string, PersonalityResult> = {
     "figureName": "Manacle",
     "series": "Little Mischief",
     "tagline": "you didn't start the argument but you will absolutely finish it",
-    "description": "your brain is a debate stage and every conversation is an opportunity. you're not trying to be difficult — you're trying to find the most interesting version of the truth, and sometimes that means poking holes in things everyone else just accepts. you're the person who makes a group smarter by being annoying in exactly the right way.",
+    "description": "your brain is a debate stage and every conversation is an opportunity. you're not difficult — you're chasing the most interesting version of the truth, even if that means poking holes in what everyone else accepts. you make the group smarter by being annoying in exactly the right way.",
+    "vibeWords": [
+      "devil's advocate",
+      "argues for sport",
+      "...unless?",
+      "idea ping-pong",
+      "lovable menace",
+      "surgical roasting"
+    ],
     "thisIsYou": [
       "you've played devil's advocate so hard you changed your own mind",
       "your browser has 47 tabs open and you know what's in each one. mostly.",
@@ -369,7 +449,15 @@ export const PERSONALITIES: Record<string, PersonalityResult> = {
     "figureName": "Life-bearing Star",
     "series": "We Are All Stars",
     "tagline": "you'd give someone your jacket and somehow convince them it was their idea",
-    "description": "you run on empathy and organizational skills in equal measure. you're the person who checks in before anyone asks, who coordinates the group without making it feel like work, and who somehow always knows the right thing to say. the only thing you're bad at is taking your own advice.",
+    "description": "you run on empathy and organizational skills in equal measure. you check in before anyone asks, coordinate the group without making it feel like work, and always know the right thing to say. the only thing you're bad at is taking your own advice.",
+    "vibeWords": [
+      "mom friend deluxe",
+      "reads the room instantly",
+      "pep-talk pro",
+      "color-coded calendar",
+      "everyone's therapist",
+      "won't take own advice"
+    ],
     "thisIsYou": [
       "you check in on people before they even realize they're struggling",
       "group projects run through you whether you asked for it or not",
@@ -405,7 +493,15 @@ export const PERSONALITIES: Record<string, PersonalityResult> = {
     "figureName": "The Greatest Magician",
     "series": "Magician",
     "tagline": "you'd rather figure it out in real time than read the instructions",
-    "description": "you learn by doing, you decide by moving, and you'd rather ask forgiveness than permission. you're the first person to say yes to something risky and the last person to regret it. your decision-making process is 'how hard could it be?' and statistically it works out more often than it should.",
+    "description": "you learn by doing, decide by moving, and would rather ask forgiveness than permission. first to say yes to something risky, last to regret it. your whole process is 'how hard could it be?' — and somehow it works out more than it should.",
+    "vibeWords": [
+      "how hard could it be",
+      "adrenaline-coded",
+      "act now, think later",
+      "duct-tape solutions",
+      "zero hesitation",
+      "main character irl"
+    ],
     "thisIsYou": [
       "you've fixed something with duct tape and it's still holding",
       "your decision-making process is 'how hard could it be?'",
@@ -441,7 +537,15 @@ export const PERSONALITIES: Record<string, PersonalityResult> = {
     "figureName": "Tea Break",
     "series": "Office",
     "tagline": "you packed extra snacks because you knew someone would forget theirs",
-    "description": "you are the social infrastructure. without you, the group would fragment into six smaller groups that never hang out. you plan, you host, you check in, and you do it because you genuinely want to — not because you're performing. your superpower is making people feel seen and your kryptonite is feeling unappreciated.",
+    "description": "you are the social infrastructure — without you the group fragments into six smaller groups that never hang out. you plan, host, and check in because you genuinely want to. your superpower is making people feel seen; your kryptonite is feeling unappreciated.",
+    "vibeWords": [
+      "the glue",
+      "remembers your order",
+      "professional host",
+      "'just checking in!'",
+      "needs to be needed",
+      "google-docs warlord"
+    ],
     "thisIsYou": [
       "you remember everyone's birthdays, allergies, and drink orders",
       "you've hosted a gathering and cleaned up before anyone offered to help",
@@ -477,7 +581,15 @@ export const PERSONALITIES: Record<string, PersonalityResult> = {
     "figureName": "Serving Time",
     "series": "Pigchelin Restaurant",
     "tagline": "you are the main character and everyone else is fine with it",
-    "description": "you don't walk into a room — you arrive. you bring energy, you bring laughs, and you bring the kind of spontaneous chaos that somehow always turns into the best night ever. you're not shallow — you just know that life is short and joy is underrated. you make people feel alive by refusing to be anything less.",
+    "description": "you don't walk into a room — you arrive. you bring the energy, the laughs, and the spontaneous chaos that always turns into the best night ever. you're not shallow; you just know life is short and joy is underrated.",
+    "vibeWords": [
+      "main character",
+      "owns every dance floor",
+      "FOMO-fueled",
+      "serotonin dealer",
+      "outfit always on point",
+      "bad vibes don't survive"
+    ],
     "thisIsYou": [
       "you've never met a dance floor you didn't own",
       "FOMO is your primary motivator and honestly it works",
@@ -513,7 +625,15 @@ export const PERSONALITIES: Record<string, PersonalityResult> = {
     "figureName": "Survival Coffee",
     "series": "Office",
     "tagline": "someone had to take charge and you were tired of waiting",
-    "description": "you're the person who turns chaos into a plan and a plan into results. you don't understand why people resist structure when structure is literally the thing that makes everything work. you're direct, you're reliable, and you will absolutely tell someone the truth when no one else will. some people call you intense. you call it getting things done.",
+    "description": "you turn chaos into a plan and a plan into results. you don't get why people resist structure when structure is literally what makes everything work. you're direct, reliable, and you'll tell someone the truth when no one else will.",
+    "vibeWords": [
+      "'here's the plan'",
+      "spreadsheet for everything",
+      "reads the T&Cs",
+      "brutally honest",
+      "winging it = nightmare",
+      "gets it done"
+    ],
     "thisIsYou": [
       "your group chat messages start with 'okay here's the plan'",
       "you've made a spreadsheet for something that didn't need a spreadsheet",
@@ -549,7 +669,15 @@ export const PERSONALITIES: Record<string, PersonalityResult> = {
     "figureName": "Buddha Mode",
     "series": "Office",
     "tagline": "you've been doing it the right way this whole time and you're not about to stop now",
-    "description": "you are consistency personified. you don't chase trends, you don't cut corners, and you don't flake. ever. your word is your bond and your routine is your religion. people might mistake your steadiness for rigidity, but the truth is that the world runs on people like you — the ones who actually show up and do what they said they would.",
+    "description": "you are consistency personified — you don't chase trends, cut corners, or flake. ever. your word is your bond and your routine is your religion. people might mistake steadiness for rigidity, but the world runs on people like you.",
+    "vibeWords": [
+      "never flakes",
+      "5 minutes early",
+      "folders within folders",
+      "'if it ain't broke...'",
+      "loyalty as a lifestyle",
+      "human dependability"
+    ],
     "thisIsYou": [
       "your morning routine hasn't changed in three years and it works perfectly",
       "you show up on time. actually, five minutes early.",

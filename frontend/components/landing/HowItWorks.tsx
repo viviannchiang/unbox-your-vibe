@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const STEPS = [
   {
     number: "01",
-    title: "answer 12 questions",
+    title: "answer 20 questions",
     description:
       "two cards per question. no right answers — just pick what's more you.",
     accent: "#B8C6E8",

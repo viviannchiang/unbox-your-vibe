@@ -17,6 +17,7 @@ export interface PersonalityResult {
   series: string;
   tagline: string;
   description: string;
+  vibeWords: string[];
   thisIsYou: string[];
   groupChatVibe: string;
   compatibleWith: { type: string; character: string; figure: string }[];

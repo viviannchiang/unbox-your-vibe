@@ -6,7 +6,7 @@ const CHARACTERS = [
   {
     name: "Nyota",
     vibe: "the dreamers",
-    description: "soft · introspective · celestial",
+    description: "soft · heartfelt · celestial",
     color: "#B8C6E8",
     initial: "N",
     figures: [
@@ -34,7 +34,7 @@ const CHARACTERS = [
   {
     name: "Lulu",
     vibe: "the caretakers",
-    description: "warm · social · cheerful",
+    description: "warm · lively · loyal",
     color: "#F5B5C0",
     initial: "L",
     figures: [
