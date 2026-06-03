@@ -4,10 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
+// "about" is intentionally hidden for now (page kept in the codebase for a
+// future release) — see app/about/page.tsx.
 const NAV_ITEMS = [
   { label: "quiz", href: "/" },
   { label: "store", href: "/store" },
-  { label: "about", href: "/about" },
 ];
 
 export function Nav() {
