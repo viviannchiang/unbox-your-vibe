@@ -58,7 +58,7 @@ export default function StorePage() {
           ✦ &nbsp; the collector&apos;s lineup &nbsp; ✦
         </p>
         <p className="mt-3 font-heading text-[11px] font-bold uppercase tracking-[0.28em] text-muted/80">
-          blind box, 16 figures
+          blind box &nbsp;·&nbsp; 16 figures
         </p>
       </div>
 
