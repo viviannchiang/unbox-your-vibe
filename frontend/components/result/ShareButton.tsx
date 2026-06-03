@@ -15,9 +15,13 @@ const SITE_URL = "https://viviannchiang.github.io/unbox-your-vibe/";
 export function ShareButton({
   data,
   pairs,
+  mode = "share-and-save",
 }: {
   data: PersonalityResult;
   pairs: PersonalityResult[];
+  // "share-and-save" shows both the native-share button and a save button;
+  // "save" shows only the save-image button (used on store profile pages).
+  mode?: "share-and-save" | "save";
 }) {
   const [busy, setBusy] = useState<null | "share" | "save">(null);
   const [done, setDone] = useState<null | "shared" | "saved">(null);
@@ -99,13 +103,15 @@ export function ShareButton({
 
   return (
     <>
-      <button
-        onClick={handleShare}
-        disabled={busy !== null}
-        className="rounded-full bg-text px-8 py-3 text-center font-heading text-sm font-bold lowercase tracking-wide text-background shadow-card transition-all hover:opacity-80 disabled:opacity-60"
-      >
-        {shareLabel}
-      </button>
+      {mode === "share-and-save" && (
+        <button
+          onClick={handleShare}
+          disabled={busy !== null}
+          className="rounded-full bg-text px-8 py-3 text-center font-heading text-sm font-bold lowercase tracking-wide text-background shadow-card transition-all hover:opacity-80 disabled:opacity-60"
+        >
+          {shareLabel}
+        </button>
+      )}
       <button
         onClick={handleSave}
         disabled={busy !== null}

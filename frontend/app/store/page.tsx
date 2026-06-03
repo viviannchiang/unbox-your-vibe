@@ -1,7 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
-import { withBase } from "@/lib/asset";
 import { displayCharacter } from "@/lib/constants";
+import { FigureCard } from "@/components/store/FigureCard";
 
 const CHARACTERS = [
   {
@@ -55,29 +54,19 @@ export default function StorePage() {
 
       {/* Header */}
       <div className="pattern-dots px-6 py-20 text-center">
-        <p className="font-heading text-[11px] font-bold uppercase tracking-[0.35em] text-muted">
+        <p className="font-heading text-sm font-bold uppercase tracking-[0.35em] text-muted">
           ✦ &nbsp; the collection &nbsp; ✦
-        </p>
-        <h1
-          className="mt-3 font-heading font-bold lowercase leading-tight text-text"
-          style={{ fontSize: "clamp(2.8rem, 7vw, 5rem)" }}
-        >
-          the figures.
-        </h1>
-        <p className="mt-3 font-body text-sm text-muted">
-          16 figures across 3 characters.{" "}
-          <Link href="/" className="underline underline-offset-2 hover:text-text transition-colors">
-            take the quiz
-          </Link>{" "}
-          to find yours.
         </p>
       </div>
 
       {/* Character sections */}
-      {CHARACTERS.map((char, charIdx) => (
+      {CHARACTERS.map((char) => (
         <section
           key={char.name}
-          className={charIdx % 2 === 0 ? "bg-card" : "bg-background"}
+          // Tint each section with a soft wash of the character's colour so the
+          // white card info strips stand out (a plain-white section would hide
+          // them).
+          style={{ backgroundColor: char.color + "1F" }}
         >
           <div className="mx-auto max-w-5xl px-6 py-16">
 
@@ -135,41 +124,5 @@ export default function StorePage() {
         </Link>
       </div>
     </main>
-  );
-}
-
-// ── Figure card ───────────────────────────────────────────
-type Figure = { mbti: string; name: string; series: string };
-
-const slugify = (name: string) =>
-  name.toLowerCase().replace(/'/g, "").replace(/\s+/g, "-");
-
-function FigureCard({ figure, color }: { figure: Figure; color: string }) {
-  return (
-    <div className="group overflow-hidden rounded-3xl shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover">
-      {/* Top — colour swatch + figure photo */}
-      <div
-        className="relative flex h-36 items-center justify-center"
-        style={{ backgroundColor: color }}
-      >
-        <Image
-          src={withBase(`/images/figures/${slugify(figure.name)}.png`)}
-          alt={figure.name}
-          width={130}
-          height={130}
-          className="h-28 w-28 object-contain drop-shadow-md transition-transform duration-200 group-hover:scale-105"
-        />
-      </div>
-
-      {/* Bottom — info */}
-      <div className="bg-card px-4 py-4">
-        <p className="font-heading text-sm font-bold lowercase leading-snug text-text">
-          {figure.name}
-        </p>
-        <p className="mt-0.5 font-body text-[11px] lowercase text-muted">
-          {figure.series} series
-        </p>
-      </div>
-    </div>
   );
 }
