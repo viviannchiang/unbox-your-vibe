@@ -1,25 +1,14 @@
 // Fully client-side data layer — no backend required.
-// Quiz data + scoring were ported from the former FastAPI backend so the app
-// can run as a static site (e.g. GitHub Pages).
+// Quiz scoring + data run in the browser so the app can be a static site.
 
-import type { Question, PersonalityResult, QuizAnswer, ScoreResponse } from "./types";
-import { QUESTIONS } from "./data/questions";
+import type { PersonalityResult, Pole, ScoreResponse } from "./types";
 import { PERSONALITIES } from "./data/personalities";
-import { scoreAnswers, slugifyFigure } from "./scoring";
+import { scoreFromPoles, slugifyFigure } from "./scoring";
 
 export const api = {
-  // Public questions — scores stripped, matching the old API shape.
-  async getQuestions(): Promise<Question[]> {
-    return QUESTIONS.map((q) => ({
-      id: q.id,
-      text: q.text,
-      axis: q.axis,
-      cards: q.cards.map((c) => ({ id: c.id, label: c.label })),
-    }));
-  },
-
-  async submitAnswers(answers: QuizAnswer[]): Promise<ScoreResponse> {
-    const { type, character } = scoreAnswers(answers);
+  // Score a completed story run (the poles picked along the path) into a figure.
+  submitStory(poles: Pole[]): ScoreResponse {
+    const { type, character } = scoreFromPoles(poles);
     const profile = PERSONALITIES[type];
     return {
       type,

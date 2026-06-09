@@ -44,7 +44,7 @@ export const MBTI_TO_CHARACTER: Record<string, string> = {
   ISTJ: "Lulu",
 };
 
-export const TOTAL_QUESTIONS = 12;
+export const TOTAL_QUESTIONS = 20;
 
 // Each of the 16 figures gets its own background colour (reusable for the
 // box rotation on the landing page and as a profile/result backdrop later).
