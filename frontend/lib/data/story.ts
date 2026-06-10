@@ -97,7 +97,7 @@ const STEPS: StepDef[] = [
       F: {
         text: "the kitten settles and an auntie takes it in. the market sprawls into a maze of lanes. how do you tackle it?",
         options: [
-          "you lock in a game plan off the signboard first.",
+          "you map your route off the signboard first.",
           "no plan. you follow your nose and let the market lead.",
         ],
       },
@@ -150,7 +150,7 @@ const STEPS: StepDef[] = [
       S: {
         text: "past the food, a little shrine glows with a fortune-stick stall. “i only tell it true,” the reader says. what do you ask for?",
         options: [
-          "the honest reading. give you the facts, even the unflattering ones.",
+          "the honest reading. you want the facts, even the unflattering ones.",
           "the kind version. you're a little tender tonight and you know it.",
         ],
       },
@@ -158,7 +158,7 @@ const STEPS: StepDef[] = [
         text: "a tiny shrine glows at the edge of the lane, fortune sticks rattling in a cup. “i only tell it true,” the reader says. what do you ask for?",
         options: [
           "the real reading, no softening. accuracy over comfort.",
-          "the gentle one. go easy on you tonight.",
+          "the gentle one. you could use something soft tonight.",
         ],
       },
     },
@@ -188,14 +188,14 @@ const STEPS: StepDef[] = [
     axis: "EI",
     variants: {
       J: {
-        text: "show handled, you need a seat for your pepper bun and bubble tea, and a family at a packed plastic table waves you to squeeze in. what do you do?",
+        text: "show handled, you need a seat for your pepper bun and bubble tea, and a family at a packed plastic table waves you over to squeeze in. what do you do?",
         options: [
           "you sit right down and you're deep in conversation before you've taken a bite.",
           "you thank them, smile, and find your own quiet stool around the corner.",
         ],
       },
       P: {
-        text: "you need a seat for your food, and a family at a packed plastic table waves you to squeeze in. what do you do?",
+        text: "you need a seat for your food, and a family at a packed plastic table waves you over to squeeze in. what do you do?",
         options: [
           "you join instantly. strangers become dinner friends, easy.",
           "you wave warmly but go find your own little spot.",
@@ -210,7 +210,7 @@ const STEPS: StepDef[] = [
       E: {
         text: "your table-mates ask where you're headed next, ready to point the way. what do you tell them?",
         options: [
-          "“just tell me which lane has the good stuff and how to get there.”",
+          "“just tell me which lane has the best food and the fastest way there.”",
           "“wherever feels lucky.” they laugh and send you somewhere with no name.",
         ],
       },
@@ -331,7 +331,7 @@ const STEPS: StepDef[] = [
         text: "advice delivered (they're obsessed with you now), a market auntie waves you over. “last lap, kid. i show you around, or you go your own way?”",
         options: [
           "“show me around.” best of what's left, in order, no time wasted.",
-          "“i'll wander.” you'll feel your way to the good stuff.",
+          "“i'll wander.” you trust you'll find the best of it by feel.",
         ],
       },
       F: {
