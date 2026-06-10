@@ -26,7 +26,7 @@ export function QuestionView({
         >
           ✦ &nbsp; choose one
         </p>
-        <h2 className="font-heading text-2xl font-bold lowercase leading-snug text-text sm:text-3xl">
+        <h2 className="font-heading text-2xl font-bold lowercase leading-snug text-[#FBF6EF] sm:text-3xl">
           {question.text}
         </h2>
       </div>

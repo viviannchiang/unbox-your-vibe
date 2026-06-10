@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { api } from "@/lib/api";
 import { QuestionView } from "@/components/quiz/QuestionView";
+import { NightMarketBackground } from "@/components/quiz/NightMarketBackground";
 import { RevealExperience } from "@/components/reveal/RevealExperience";
 import { QUIZ_COMPLETED_KEY } from "@/lib/constants";
 import { slugifyFigure } from "@/lib/scoring";
@@ -128,12 +129,13 @@ export function QuizContainer() {
   // ── Finale beat → "opening your box" ───────────────────────
   if (submitting) {
     return (
-      <div className="pattern-dots flex min-h-[calc(100dvh_-_3.5rem)] flex-col items-center justify-center gap-7 px-6 pt-14 text-center">
+      <div className="flex min-h-[calc(100dvh_-_3.5rem)] flex-col items-center justify-center gap-7 px-6 pt-14 text-center">
+        <NightMarketBackground />
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="max-w-md font-body text-base leading-relaxed text-text/80"
+          className="max-w-md font-body text-base leading-relaxed text-white/85"
         >
           {FINALE_TEXT}
         </motion.p>
@@ -148,7 +150,7 @@ export function QuizContainer() {
         <motion.p
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          className="font-heading text-sm font-bold lowercase tracking-wide text-muted"
+          className="font-heading text-sm font-bold lowercase tracking-wide text-white/60"
         >
           opening your box...
         </motion.p>
@@ -196,11 +198,13 @@ export function QuizContainer() {
     ((scene.step - 1 + (selectedCardId ? 1 : 0)) / TOTAL_STEPS) * 100;
 
   return (
-    <div className="pattern-dots relative flex min-h-[calc(100dvh_-_3.5rem)] flex-col items-center justify-center px-4 pt-14">
+    <div className="relative flex min-h-[calc(100dvh_-_3.5rem)] flex-col items-center justify-center px-4 pt-14">
+      <NightMarketBackground />
+
       {/* ── Progress bar (fixed just below nav) ── */}
-      <div className="fixed inset-x-0 top-14 z-10 bg-background/80 px-6 py-4 backdrop-blur-sm">
+      <div className="fixed inset-x-0 top-14 z-10 bg-[#170f30]/40 px-6 py-4 backdrop-blur-sm">
         <div className="mx-auto flex max-w-xl items-center gap-3">
-          <div className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-text/10">
+          <div className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-white/15">
             <motion.div
               className="absolute inset-y-0 left-0 rounded-full"
               style={{ backgroundColor: accentColor }}
@@ -208,7 +212,7 @@ export function QuizContainer() {
               transition={{ duration: 0.45, ease: "easeOut" }}
             />
           </div>
-          <span className="w-10 text-right font-heading text-[11px] font-bold uppercase tracking-[0.28em] text-muted">
+          <span className="w-10 text-right font-heading text-[11px] font-bold uppercase tracking-[0.28em] text-white/55">
             {scene.step}/{TOTAL_STEPS}
           </span>
         </div>
