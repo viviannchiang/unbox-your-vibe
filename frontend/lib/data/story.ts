@@ -48,17 +48,17 @@ const STEPS: StepDef[] = [
     axis: "SN",
     variants: {
       E: {
-        text: "your new auntie friend points you to the busiest drink stall. “best in the market,” she swears. what do you get?",
+        text: "your auntie friend tugs you toward the busiest drink stall, steam and sweetness everywhere. what do you reach for?",
         options: [
-          "you order your forever drink: classic pearl milk tea, the one that never lets you down.",
-          "you point at tonight's mystery special, the one with no name on the board.",
+          "your usual brown-sugar pearl milk tea, that exact smell you always get.",
+          "the no-name drink with a little moon drawn on the sign.",
         ],
       },
       I: {
-        text: "you drift to a quiet drink stall glowing under one bare bulb. what do you order?",
+        text: "you drift to a quiet drink stall glowing under one bare bulb. what do you reach for?",
         options: [
-          "your usual bubble tea, exactly the way you always get it.",
-          "the weird seasonal brew the vendor won't explain. you're intrigued.",
+          "the cold, sweating cup of your usual bubble tea, exactly right.",
+          "the seasonal brew that smells like a season that doesn't exist yet.",
         ],
       },
     },
@@ -128,17 +128,17 @@ const STEPS: StepDef[] = [
     axis: "SN",
     variants: {
       E: {
-        text: "all that hyping made you starving, and you hit the food gauntlet: charcoal pepper buns, chicken cutlets bigger than your face, sizzling oyster omelets. what do you order?",
+        text: "starving now, the food gauntlet hits all at once: charcoal smoke, sizzling oil, sweet sauce. what do you grab first?",
         options: [
-          "your ride-or-die: the pepper bun you already know is perfect. no risks.",
-          "something you've never tried, just to see. “one of whatever that is.”",
+          "the pepper bun, that smell you'd know anywhere, straight from the clay oven.",
+          "whatever the unmarked stall is selling, the one with a line that looks in on a secret.",
         ],
       },
       I: {
-        text: "you slip to a calmer food lane lined with the classics: oyster omelet, taiwanese hot dog, stinky tofu. what do you order?",
+        text: "you slip to a calmer food lane where the smells drift softer. what do you grab first?",
         options: [
-          "your comfort order, the oyster omelet you get every single time. it never misses.",
-          "the unlabeled special you can't identify. curiosity wins tonight.",
+          "the oyster omelet, sizzling exactly the way it always does.",
+          "the unmarked pot of something you can't place, steam curling out mysteriously.",
         ],
       },
     },
@@ -288,17 +288,17 @@ const STEPS: StepDef[] = [
     axis: "SN",
     variants: {
       E: {
-        text: "buzzing, you pass a stall of little keepsakes and a temple amulet cart. “take one, to remember tonight,” the vendor says. which do you pick?",
+        text: "buzzing, you pass a stall of keepsakes and a temple amulet cart. what do you pick up?",
         options: [
-          "something you'll actually use. a real, practical little thing.",
-          "a 平安符 charm “for safe travels.” useless maybe, but it means something.",
+          "a small, solid thing that feels good in your hand, something you'd actually use.",
+          "a 平安符 charm, glowing faintly like it means something.",
         ],
       },
       I: {
-        text: "you pass a stall of little keepsakes and a temple amulet cart. “take one,” the vendor says softly, “to remember.” which do you pick?",
+        text: "you pass a stall of keepsakes and a temple amulet cart. what do you pick up?",
         options: [
-          "the practical pick. you like a keepsake that earns its spot in your bag.",
-          "the little charm with a meaning. it'll wreck you (lovingly) in five years.",
+          "the practical little object, real and useful, earns its spot in your bag.",
+          "the charm with a story stitched into it. useless, but it tugs at something.",
         ],
       },
     },
@@ -368,17 +368,17 @@ const STEPS: StepDef[] = [
     axis: "SN",
     variants: {
       E: {
-        text: "recharged by the crowd, you lean back against a railing and look up past the neon. what catches you?",
+        text: "recharged by the crowd, you lean back against a railing and look up past the neon. what do you notice?",
         options: [
           "the scene itself: red lanterns, steam, the real glow of right now.",
-          "your brain drifts: what's past all this, what does any of it mean.",
+          "your mind drifting past it all: what's out there, what does any of it mean.",
         ],
       },
       I: {
-        text: "settled and quiet, you lean against a railing and look up past the neon. what catches you?",
+        text: "settled and quiet, you lean against a railing and look up past the neon. what do you notice?",
         options: [
           "the actual details: lanterns swaying, the sky barely showing, this exact moment.",
-          "you float off into what-ifs and whole other worlds.",
+          "the what-ifs pulling you off into whole other worlds.",
         ],
       },
     },
