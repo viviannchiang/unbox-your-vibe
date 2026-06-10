@@ -131,14 +131,14 @@ const STEPS: StepDef[] = [
         text: "starving now, the food gauntlet hits all at once: charcoal smoke, sizzling oil, sweet sauce. what do you grab first?",
         options: [
           "the pepper bun, that smell you'd know anywhere, straight from the clay oven.",
-          "whatever the unmarked stall is selling, the one with a line that looks in on a secret.",
+          "the unmarked stall ladling something dark and sweet that you can't name.",
         ],
       },
       I: {
         text: "you slip to a calmer food lane where the smells drift softer. what do you grab first?",
         options: [
           "the oyster omelet, sizzling exactly the way it always does.",
-          "the unmarked pot of something you can't place, steam curling out mysteriously.",
+          "the clay pot bubbling with something herbal and strange, no label in sight.",
         ],
       },
     },
@@ -290,15 +290,15 @@ const STEPS: StepDef[] = [
       E: {
         text: "buzzing, you pass a stall of keepsakes and a temple amulet cart. what do you pick up?",
         options: [
-          "a small, solid thing that feels good in your hand, something you'd actually use.",
-          "a 平安符 charm, glowing faintly like it means something.",
+          "a little brass keychain shaped like a lantern, cool and solid in your palm.",
+          "a hand-stitched 平安符 charm that seems to hum with someone's old wish.",
         ],
       },
       I: {
         text: "you pass a stall of keepsakes and a temple amulet cart. what do you pick up?",
         options: [
-          "the practical little object, real and useful, earns its spot in your bag.",
-          "the charm with a story stitched into it. useless, but it tugs at something.",
+          "a smooth jade bead you can roll between your fingers, real and grounding.",
+          "a faded charm with a story stitched into it, the kind that means more later.",
         ],
       },
     },
